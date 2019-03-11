@@ -1,0 +1,4 @@
+#!/bin/bash
+
+mysqldump -u root --all-databases > backups/alldatabases-$(date "+%d-%m-%Y_%H:%M:%S").sql
+sudo systemctl restart apache2
