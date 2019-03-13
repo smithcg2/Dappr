@@ -1,5 +1,5 @@
 <?php
-	include("../scripts/config.php");
+	include("../../config.php");
 	
 	session_start();
 
