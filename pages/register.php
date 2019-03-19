@@ -1,10 +1,12 @@
 <?php
+session_start();
+
 // Include config file
-require_once "../../config.php";
+require("../../config.php");
  
 // Define variables and initialize with empty values
-$username = $password = $confirm_password = "";
-$username_err = $password_err = $confirm_password_err = "";
+$email = $username = $password = $confirm_password = "";
+$email_err = $username_err = $password_err = $confirm_password_err = "";
  
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -16,7 +18,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         // Prepare a select statement
         $sql = "SELECT USER_ID FROM USERS WHERE USER = ?";
         
-        if($stmt = mysqli_prepare($link, $sql)){
+        if($stmt = mysqli_prepare($db, $sql)){
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "s", $param_username);
             
@@ -65,22 +67,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
         
         // Prepare an insert statement
-        $sql = "INSERT INTO USERS (USER, PASS, FNAME, MNAME, LNAME, DOB, CITY, STATE, ZIP) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO USERS (USER, EMAIL, PASS, FNAME, MNAME, LNAME) VALUES (?, password(?),?,?,?,?)";
          
-        if($stmt = mysqli_prepare($link, $sql)){
+        if($stmt = mysqli_prepare($db, $sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_password, $param_fname, $param_mname, $param_lname, $param_dob, $param_city, $param_state, $param_zip);
+            mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_password, $param_email, $param_fname, $param_mname, $param_lname);
             
             // Set parameters
             $param_username = $username;
-	    $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
-	    $param_fname = trim($_POST['fname']);
-	    $param_mname = trim($_POST['mname']);
-	    $param_lname = trim($_POST['lname']);
-	    $param_dob = trim($_POST['dob']);
-	    $param_city = trim($_POST['city']);
-	    $param_state = trim($_POST['state']);
-	    $param_zip = trim($_POST['zip']);
+	    $param_password = $password;
+	    $param_email = $_POST['email'];
+	    $param_fname = $_POST['fname'];
+	    $param_mname = $_POST['mname'];
+	    $param_lname = $_POST['lname'];
             
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
@@ -96,26 +95,49 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
     
     // Close connection
-    mysqli_close($link);
+    mysqli_close($db);
 }
+
 ?>
- 
-<!DOCTYPE html>
-<html lang="en">
+
+
+<!doctype html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Sign Up</title>
-    <link rel="stylesheet" href="main.css">
-    <style type="text/css">
-        body{ font: 14px sans-serif; }
-        .wrapper{ width: 650px; padding: 20px; }
-    </style>
-</head>
-<body>
-    <div class="wrapper">
-        <h2>Sign Up</h2>
-        <p>Please fill this form to create an account.</p>
+	<title>Dappr</title>
+	<meta name = "viewport" content="width=device-width, maximum-scale=1.5">
+	<link rel="stylesheet" type="text/css" href="../style/main.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-135138799-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-135138799-1');
+</script>
+</head>	
+	<body>
+
+<div id="nav">
+<a href="../pages/home.php">
+<img id="homelogo" src="../images/logo_only.png" alt="logo">
+<img id="logotext" src="../images/logo_textonly.png" alt="Dappr">
+</a>
+</div>
+    <div id="wrapper">
+	<div id="registerform">
+        <h2>Join Dappr!</h2>
+        <p>Please fill this form to create an account. Great things await inside.</p>
+		<center><hr class="formsplit"/><h4 class="formlabel">1. Your Account Credentials</h4><hr class="formsplit"/></center>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
+                <label>Email Address</label>
+                <input type="email" name="email" class="form-control" value="<?php echo $param_email; ?>">
+                <span class="help-block"><?php echo $email_err; ?></span>
+            </div>    
             <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
                 <label>Username</label>
                 <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
@@ -130,95 +152,28 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <label>Confirm Password</label>
                 <input type="password" name="confirm_password" class="form-control" value="<?php echo $confirm_password; ?>">
                 <span class="help-block"><?php echo $confirm_password_err; ?></span>
-            </div>
-            <div>
-                <label>First Name</label>
-                <input type="text" name="fname" class="form-control" value="">
-            </div>
-            <div>
-                <label>Middle Name</label>
-                <input type="text" name="mname" class="form-control" value="">
-            </div>
-            <div>
-                <label>Last Name</label>
-                <input type="text" name="lname" class="form-control" value="">
-            </div>
-            <div>
-                <label>Date of Birth</label>
-                <input type="date" name="dob" class="form-control" value="">
-            </div>
-            <div>
-                <label>State</label>
-		<select class="form-control" id="state" name="state">
-			<option value="">N/A</option>
-			<option value="AK">Alaska</option>
-			<option value="AL">Alabama</option>
-			<option value="AR">Arkansas</option>
-			<option value="AZ">Arizona</option>
-			<option value="CA">California</option>
-			<option value="CO">Colorado</option>
-			<option value="CT">Connecticut</option>
-			<option value="DC">District of Columbia</option>
-			<option value="DE">Delaware</option>
-			<option value="FL">Florida</option>
-			<option value="GA">Georgia</option>
-			<option value="HI">Hawaii</option>
-			<option value="IA">Iowa</option>
-			<option value="ID">Idaho</option>
-			<option value="IL">Illinois</option>
-			<option value="IN">Indiana</option>
-			<option value="KS">Kansas</option>
-			<option value="KY">Kentucky</option>
-			<option value="LA">Louisiana</option>
-			<option value="MA">Massachusetts</option>
-			<option value="MD">Maryland</option>
-			<option value="ME">Maine</option>
-			<option value="MI">Michigan</option>
-			<option value="MN">Minnesota</option>
-			<option value="MO">Missouri</option>
-			<option value="MS">Mississippi</option>
-			<option value="MT">Montana</option>
-			<option value="NC">North Carolina</option>
-			<option value="ND">North Dakota</option>
-			<option value="NE">Nebraska</option>
-			<option value="NH">New Hampshire</option>
-			<option value="NJ">New Jersey</option>
-			<option value="NM">New Mexico</option>
-			<option value="NV">Nevada</option>
-			<option value="NY">New York</option>
-			<option value="OH">Ohio</option>
-			<option value="OK">Oklahoma</option>
-			<option value="OR">Oregon</option>
-			<option value="PA">Pennsylvania</option>
-			<option value="PR">Puerto Rico</option>
-			<option value="RI">Rhode Island</option>
-			<option value="SC">South Carolina</option>
-			<option value="SD">South Dakota</option>
-			<option value="TN">Tennessee</option>
-			<option value="TX">Texas</option>
-			<option value="UT">Utah</option>
-			<option value="VA">Virginia</option>
-			<option value="VT">Vermont</option>
-			<option value="WA">Washington</option>
-			<option value="WI">Wisconsin</option>
-			<option value="WV">West Virginia</option>
-			<option value="WY">Wyoming</option>
-		</select>
-            </div>
-            <div>
-                <label>City</label>
-                <input type="text" name="city" class="form-control" value="">
-            </div>
-            <div>
-                <label>Zipcode</label>
-	    	<input id="zip" name="zip" type="text" inputmode="numeric" pattern="^(?(^00000(|-0000))|(\d{5}(|-\d{4})))$">
 	    </div>
+		<center><hr class="formsplit"/><h4 class="formlabel">2. Your Personal Information</h4><hr class="formsplit"/></center>
             <div class="form-group">
+                <label>First Name</label>
+                <input type="text" name="fname" class="form-control" value="<?php echo $param_fname; ?>">
+            </div>    
+            <div class="form-group">
+                <label>Middle Name</label>
+                <input type="text" name="mname" class="form-control" value="<?php echo $param_mname; ?>">
+            </div>    
+            <div class="form-group">
+                <label>Last Name</label>
+                <input type="text" name="lname" class="form-control" value="<?php echo $param_lname; ?>">
+            </div>    
+            <center><div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Submit">
                 <input type="reset" class="btn btn-default" value="Reset">
             </div>
-            <p>Already have an account? <a href="login.php">Login here</a>.</p>
+	    <p>Already have an account? <a href="login.php">Login here</a>.</p>
+		</center>
         </form>
-    </div>    
+    </div>
+</div>    
 </body>
 </html>
