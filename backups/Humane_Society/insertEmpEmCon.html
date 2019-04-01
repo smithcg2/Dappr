@@ -1,0 +1,51 @@
+<html>
+<head>
+    <title>Watauga Humane Society Database</title>
+    <link rel="stylesheet" type="text/css" href="Stylesheet1.css">
+    <link rel="icon" src="images/favicon.png">
+    <!--css and other information-->
+    </head>
+    <body>
+        <div id="wrap">
+            <div id="main">
+        <a href="index.php" id="nostylelink"><div id ="titlebar">
+            Watauga Humane Society Database
+        </div></a>
+            <div id="welcome">New Emergency Contact</div>            
+            <center>
+    <form method="post" action = "insertEmpEmCon.php">
+    <p>
+       <label for="firstName">First Name:</label>
+        <input type="text" name="emContact_Fname" id="emContact_Fname" maxlength="25" required>
+    </p>
+    <p>
+        <label for="middleInitial">Middle Initial:</label>
+        <input type="text" name="emContact_Minit" id="emContact_Minit" maxlength="1">
+    </p>
+    <p>
+        <label for="lastName">Last Name:</label>
+        <input type="text" name="emContact_Lname" id="emContact_Lname" maxlength="25" required>
+    </p>
+    <p>
+        <label for="phone">Phone Number (format: xxx-xxx-xxxx):</label>
+        <input type="tel" name="emContact_Phone" id="emContact_Phone" maxlength="12" pattern="^\d{3}-\d{3}-\d{4}$" required>
+    </p>
+    <p>
+        <label for="relation">Contact Relationship:</label>
+        <input type="text" name="emContact_Relation" id="emContact_Relation" maxlength="15" required>
+    </p>
+    <p>
+        <label for="employeeID">Employee ID:</label>
+        <input type="text" name="emEmp_ID" id="emEmp_ID" required>
+    </p>
+    <input type="submit" value="Submit">
+</form>
+                </center>
+                <div id="normal">
+                <a href="index.php"><button>Back</button></a>
+                </div>
+            </div>
+        </div>
+</body>
+</html>
+

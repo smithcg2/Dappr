@@ -1,0 +1,19 @@
+SET FOREIGN_KEY_CHECKS = 0;
+DROP table 
+animal, 
+inventory, 
+kennel, 
+volunteer,
+volunteerWorker, 
+adoptions, 
+medicalProcedures, 
+visitor, 
+facility, 
+employee, 
+employeeEmergencyContact, 
+volunteerEmergencyContact, 
+visitorEmergencyContact, 
+visitorLog,
+activityLog;
+ 
+SET FOREIGN_KEY_CHECKS = 1;

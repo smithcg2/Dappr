@@ -1,0 +1,43 @@
+<html>
+<head>
+    <title>Watauga Humane Society Database</title>
+    <link rel="stylesheet" type="text/css" href="Stylesheet1.css">
+    <link rel="icon" src="images/favicon.png">
+    <!--css and other information-->
+    </head>
+    <body>
+        <div id="wrap">
+            <div id="main">
+        <a href="index.php" id="nostylelink"><div id ="titlebar">
+            Watauga Humane Society Database
+        </div></a>
+            <div id="welcome">New Volunteer Work Log</div>            
+            <center>
+    <form method="post" action = "insertVolunteerWorker.php">
+    <p>
+       <label for="Vol_ID">Volunteer ID:</label>
+        <input type="text" name="Vol_ID" id="Vol_ID" required>
+    </p>
+    <p>
+        <label for="Facility_Num">Facility Number:</label>
+        <input type="text" name="Facility_Num" id="Facility_Num" required>
+    </p>
+    <p>
+        <label for="Time_In">Time In:</label>
+        <input type="text" name="Time_In" id="Time_In" required>
+    </p>
+    <p>
+        <label for="Time_Out">Time Out:</label>
+        <input type="text" name="Time_Out" id="Time_Out" required>
+    </p>
+    <input type="submit" value="Submit">
+</form>
+                </center>
+                <div id="normal">
+                <a href="index.php"><button>Back</button></a>
+                </div>
+            </div>
+        </div>
+</body>
+</html>
+

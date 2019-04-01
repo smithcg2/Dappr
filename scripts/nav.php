@@ -17,8 +17,9 @@ session_start();
 <html>
 <head>
 	<title>Dappr</title>
-	<meta name = "viewport" content="width=device-width, maximum-scale=1.5">
+	<meta name = "viewport" content="width=device-width, maximum-scale=1, user-scalable=no">
 	<link rel="stylesheet" type="text/css" href="../style/main.css">
+	<link rel="stylesheet" type="text/css" href="../style/responsive.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -36,6 +37,21 @@ session_start();
 
 	<body>
 
+
+
+<header class="header">
+  <a href=""><img id="homelogo" src="../images/logo_only.png"><img id="logotext" src="../images/logo_textonly.png"></a>
+  <input class="menu-btn" type="checkbox" id="menu-btn" />
+  <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+  <ul class="menu">
+    <li><a href="../pages/closet.php">My Closet</a></li>
+    <li><a href="../pages/outfits.php">My Outfits</a></li>
+    <li><a href="../pages/account.php">My Account</a></li>
+    <li><a href="../pages/logout.php">Logout</a></li>
+  </ul>
+</header>
+<!--
+
 <div id="nav">
 <a href="../pages/home.php">
 <img id="homelogo" src="../images/logo_only.png" alt="logo">
@@ -49,3 +65,4 @@ session_start();
 	</form>
 </div>
 </div>
+-->

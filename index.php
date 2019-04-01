@@ -49,8 +49,9 @@ session_start();
 <html>
 <head>
 	<title>Dappr</title>
-	<meta name = "viewport" content="width=device-width, maximum-scale=1.5">
+	<meta name = "viewport" content="width=device-width, maximum-scale=1, user-scalable=no">
 	<link rel="stylesheet" type="text/css" href="style/main.css">
+	<link rel="stylesheet" type="text/css" href="style/responsive.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135138799-1"></script>
@@ -66,9 +67,11 @@ session_start();
 </head>
 
 <body>
+
+
 <div id="nav">
 <a href="pages/home.php"><img id="homelogo" src="images/logo_only.png" alt="logo">
-<img id="logotext" src="images/logo_textonly.png" alt="Dappr">
+<img id="homelogotext" src="images/logo_textonly.png" alt="Dappr">
 </a>
 <div class="navbuttons">
 	<form method='POST' action="">
@@ -80,14 +83,29 @@ session_start();
 </div>
 </div>
 <div id="wrapper">
+<div id="home-intro">
 <center>
+<h1>Introduction</h1>
 <h2>This is currently a work in progress for a capstone project.</h2>
 <h3>Cameron Smith</h3>
 <h3>Email me any questions: <a href="mailto:questions@dappr.app">questions@dappr.app</a></h3>
-
-
 </center>
-<br/>
+<div id="searchcloset">
+<center>
+<h1>Check Out Our Closet!</h1>
+			<form class="searchclosetform" method="POST" action="">
+			<input type="search" placeholder="Search our clothes!"></input><br/>
+			<input class='submit' type='submit' value='Search' name='Search'>
+			<input class='submit' type='submit' value='Advanced Search' name='AdvancedSearch'>
+			<br/>
+				<a href="addclothes.php">Want to help? Add Clothes</a>
+			</form>
+</center>
+</div>
+<div id="home-images">
+Images
+</div>
+</div>
 </div>
 <?php include("scripts/footer.php"); ?>
 </body>

@@ -1,0 +1,51 @@
+<html>
+<head>
+    <title>Watauga Humane Society Database</title>
+    <link rel="stylesheet" type="text/css" href="Stylesheet1.css">
+    <link rel="icon" src="images/favicon.png">
+    <!--css and other information-->
+    </head>
+    <body>
+        <div id="wrap">
+            <div id="main">
+        <a href="index.php" id="nostylelink"><div id ="titlebar">
+            Watauga Humane Society Database
+        </div></a>
+            <div id="welcome">New Inventory</div>
+            <center>
+<form method="post" action = "insertInventory.php">
+<p>
+       <label for="Product_ID">Product ID:</label>
+       <input type="text" name="Product_ID" id="Product_ID" required>
+   </p>
+   <p>
+       <label for="Product_Name">Product Name:</label>
+       <input type="text" name="Product_Name" id="Product_Name" maxLength = 50  required>
+   </p>
+   <p>
+       <label for="Quantity">Quantity:</label>
+       <input type="number" min="0" name="Quantity" id="Quantity" required>
+   </p>
+   <p>
+       <label for="Product_Price">Product Price:</label>
+       <input type="number" name="Product_Price" id="Product_Price" step = "0.01" min = "0" required>
+   </p>
+   <p>
+       <label for="Expiration_Date">Expiration Date:</label>
+       <input type="date" name="Expiration_Date" id="Expiration_Date">
+   </p>
+   <p>
+       <label for="Facility_Num">Facility Number:</label>
+       <input type="text" name="Facility_Num" id="Facility_Num" required>
+   </p>
+   <input type="submit" value="Submit">
+</form>
+                </center>
+                <div id="normal">
+                <a href="index.php"><button>Back</button></a>
+                </div>
+            </div>
+        </div>
+</body>
+</html>
+

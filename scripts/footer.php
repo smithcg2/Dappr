@@ -7,8 +7,11 @@
 		</center></td>
 		
 		<td id="ftrmdl"><center>
-			<img id="footerimg" src="../images/logo_only.png"><br/>
-			&copy; 2019 Dappr. All Rights Reserved
+		<table><tr>
+			<td style="text-align: right; width: auto;">&copy; 2019 Dappr.</td>
+			<td style="text-align: center; width: 45px;"><img id="footerimg" src="../images/logo_only.png"></td>
+			<td style="text-align: left; width: auto;"> All Rights Reserved </td>
+		</tr></table>
 		</center></td>
 		
 		<td id="ftrrt">

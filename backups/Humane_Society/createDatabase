@@ -1,0 +1,242 @@
+CREATE TABLE visitor (
+  Visitor_ID INT NOT NULL,
+  Visitor_Fname varchar(50) NOT NULL,
+  Visitor_MI char(1),
+  Visitor_Lname varchar(50) NOT NULL,
+  Visitor_Allergies TEXT,
+  Previous_Pet_Owner ENUM('Y','N') NOT NULL,
+  
+  CONSTRAINT PRIMARY KEY (Visitor_ID)
+);
+
+CREATE TABLE facility (
+  Facility_Number INT NOT NULL,
+  Building_Name varchar(50) NOT NULL,
+  Address varchar(50) NOT NULL,
+  Phone_Number CHAR(12) NOT NULL,
+ 
+  CONSTRAINT PRIMARY KEY (Facility_Number)
+);
+
+CREATE TABLE kennel (
+  Kennel_Number INT NOT NULL,
+  Type varchar(50) NOT NULL,
+  Max_Occupancy INT NOT NULL,
+  Facility_Num INT NOT NULL,
+ 
+  CONSTRAINT PRIMARY KEY (Kennel_Number),
+  CONSTRAINT FOREIGN KEY (Facility_Num) REFERENCES facility(Facility_Number) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE inventory (
+  Product_ID INT NOT NULL,
+  Product_Name varchar(50) NOT NULL,
+  Quantity INT NOT NULL,
+  Product_Price DECIMAL(15, 2) NOT NULL,
+  Expiration_Date DATE,
+  Facility_Num INT,
+ 
+  CONSTRAINT PRIMARY KEY (Product_ID),
+  CONSTRAINT FOREIGN KEY (Facility_Num) REFERENCES facility(Facility_Number)
+
+  ON UPDATE CASCADE
+  ON DELETE CASCADE
+);
+
+CREATE TABLE animal (
+  Animal_ID INT NOT NULL,
+  Animal_Name VARCHAR(25),
+  Species VARCHAR(25) NOT NULL,
+  Breed VARCHAR(25) NOT NULL,
+  Special_Needs TEXT,
+  Spayed_Neutered ENUM('Y', 'N'),
+  Clawed_Declawed ENUM('Clawed', 'Declawed'),
+  Kennel_Number INT,
+  Photo_ID TEXT,
+
+  CONSTRAINT PRIMARY KEY (Animal_ID),
+  CONSTRAINT FOREIGN KEY (Kennel_Number) REFERENCES kennel (Kennel_Number)
+  
+  ON UPDATE CASCADE
+  ON DELETE SET NULL
+
+);
+
+CREATE TABLE visitorLog (
+  Vis_ID INT NOT NULL,
+  Fac_Number INT NOT NULL,
+  Time_In DATETIME NOT NULL,
+  Time_Out DATETIME NOT NULL,
+
+  CONSTRAINT FOREIGN KEY (Vis_ID) REFERENCES visitor(Visitor_ID)
+  
+  ON UPDATE CASCADE 
+  ON DELETE CASCADE,
+  
+  CONSTRAINT FOREIGN KEY (Fac_Number) REFERENCES facility(Facility_Number)
+  ON UPDATE CASCADE 
+  ON DELETE CASCADE
+);
+
+CREATE TABLE activityLog (
+  Activity_Visitor_ID INT NOT NULL,
+  Activity_Animal_ID INT NOT NULL,
+  Activity_Type TEXT NOT NULL,
+  Time_In DATETIME NOT NULL,
+  Time_Out DATETIME NOT NULL,
+
+  CONSTRAINT FOREIGN KEY (Activity_Visitor_ID) REFERENCES visitor(Visitor_ID)
+    
+  ON UPDATE CASCADE 
+  ON DELETE CASCADE,
+  
+  CONSTRAINT FOREIGN KEY (Activity_Animal_ID) REFERENCES animal(Animal_ID)
+    
+  ON UPDATE CASCADE 
+  ON DELETE CASCADE
+);
+
+CREATE TABLE adoptions (
+  Adoption_Visitor_ID INT NOT NULL,
+  Adoption_Animal_ID INT NOT NULL,
+  Date_Time DATE NOT NULL,
+  Fees_Paid ENUM('Y','N') NOT NULL,
+  
+  CONSTRAINT FOREIGN KEY (Adoption_Visitor_ID) REFERENCES visitor(Visitor_ID)
+  
+  ON UPDATE CASCADE 
+  ON DELETE CASCADE,
+  
+  CONSTRAINT FOREIGN KEY (Adoption_Animal_ID) REFERENCES animal(Animal_ID)
+    
+  ON UPDATE CASCADE 
+  ON DELETE CASCADE
+);
+
+CREATE TABLE employee (
+Employee_ID INT NOT NULL,
+SSN VARCHAR(9) NOT NULL,
+Emp_FName VARCHAR(20) NOT NULL,
+Emp_MI VARCHAR(1) NOT NULL,
+Emp_LName VARCHAR(25) NOT NULL,
+dob DATE NOT NULL,
+Emp_Phone CHAR(12) NOT NULL,
+Emp_Email VARCHAR(40),
+Start_Date DATE NOT NULL,
+Skills_Certifications TEXT,
+Emp_Allergies TEXT,
+Emp_PayRate INT NOT NULL,
+Super_ID INT,
+Facility_Number INT,
+
+CONSTRAINT PRIMARY KEY (Employee_ID),
+
+CONSTRAINT FOREIGN KEY (Super_ID) REFERENCES employee(Employee_ID)
+
+ON UPDATE CASCADE 
+ON DELETE SET NULL,
+
+CONSTRAINT FOREIGN KEY (Facility_Number) REFERENCES facility(Facility_Number)
+
+ON DELETE SET NULL
+ON UPDATE CASCADE
+);
+
+
+CREATE TABLE medicalProcedures (
+  Employee_ID INT NOT NULL,
+  Animal_ID INT NOT NULL,
+  Date_Time DATE NOT NULL,
+  Procedure_Type TEXT NOT NULL,
+  Medication_Used TEXT NOT NULL,
+  Cost Decimal(15,2) NOT NULL,
+  
+  CONSTRAINT FOREIGN KEY (Employee_ID) REFERENCES employee(Employee_ID)
+  
+  ON UPDATE CASCADE
+  ON DELETE CASCADE,
+  
+  CONSTRAINT FOREIGN KEY (Animal_ID) REFERENCES animal(Animal_ID) 
+    
+  ON UPDATE CASCADE
+  ON DELETE CASCADE
+);
+
+CREATE TABLE volunteer (
+Volunteer_ID INT NOT NULL,
+Vol_FName VARCHAR(25) NOT NULL,
+Vol_MI VARCHAR(1) NOT NULL,
+Vol_LName VARCHAR(30) NOT NULL,
+dob DATE NOT NULL NOT NULL,
+Vol_Phone CHAR(12) NOT NULL,
+Vol_Email VARCHAR(40),
+Organization VARCHAR(50),
+Vol_Allergies TEXT,
+Signed_Release VARCHAR(1) NOT NULL,
+
+CONSTRAINT PRIMARY KEY (Volunteer_ID)
+);
+
+CREATE TABLE employeeEmergencyContact
+(
+empContact_Fname varchar(25) NOT NULL,
+empContact_Minit varchar(1),
+empContact_Lname varchar(25) NOT NULL,
+empContact_Phone CHAR(12) NOT NULL,
+empContact_Relation varchar(15) NOT NULL,
+emp_ID INT NOT NULL,
+
+CONSTRAINT empContact_ID PRIMARY KEY (empContact_Fname, empContact_Minit, empContact_Lname),
+CONSTRAINT FOREIGN KEY (emp_ID) REFERENCES employee(Employee_ID)
+  
+  ON UPDATE CASCADE
+  ON DELETE CASCADE
+);
+
+CREATE TABLE visitorEmergencyContact
+(
+visContact_Fname varchar(25) NOT NULL,
+visContact_Minit varchar(1),
+visContact_Lname varchar(25) NOT NULL,
+visContact_Phone CHAR(12) NOT NULL,
+visContact_Relation varchar(15) NOT NULL,
+vis_ID INT NOT NULL,
+
+CONSTRAINT visContact_ID PRIMARY KEY (visContact_Fname, visContact_Minit, visContact_Lname),
+CONSTRAINT FOREIGN KEY (vis_ID) REFERENCES visitor(Visitor_ID)
+  
+  ON UPDATE CASCADE
+  ON DELETE CASCADE
+);
+
+CREATE TABLE volunteerEmergencyContact
+(
+volContact_Fname varchar(25) NOT NULL,
+volContact_Minit varchar(1),
+volContact_Lname varchar(25) NOT NULL,
+volContact_Phone CHAR(12) NOT NULL,
+volContact_Relation varchar(15) NOT NULL,
+vol_ID INT NOT NULL,
+
+CONSTRAINT volContact_ID PRIMARY KEY (volContact_Fname, volContact_Minit, volContact_Lname),
+CONSTRAINT FOREIGN KEY (vol_ID) REFERENCES volunteer(Volunteer_ID) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE volunteerWorker
+(
+volunteerWorker_ID INT NOT NULL,
+volunteerWorker_FacilityNum INT NOT NULL,
+volunteerWorker_TimeIn DATE NOT NULL,
+volunteerWorker_TimeOut DATE NOT NULL,
+
+CONSTRAINT FOREIGN KEY (volunteerWorker_ID) REFERENCES volunteer(Volunteer_ID)
+  
+  ON UPDATE CASCADE
+  ON DELETE CASCADE,
+  
+CONSTRAINT FOREIGN KEY (volunteerWorker_FacilityNum) REFERENCES facility(Facility_Number)
+  
+  ON UPDATE CASCADE
+  ON DELETE CASCADE
+);
+

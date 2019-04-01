@@ -1,0 +1,39 @@
+<html>
+<head>
+    <title>Watauga Humane Society Database</title>
+    <link rel="stylesheet" type="text/css" href="Stylesheet1.css">
+    <link rel="icon" src="images/favicon.png">
+    <!--css and other information-->
+    </head>
+    <body>
+        <div id="wrap">
+            <div id="main">
+        <a href="index.php" id="nostylelink"><div id ="titlebar">
+            Watauga Humane Society Database
+        </div></a>
+            <div id="welcome"> Search for Emergency Contact by Volunteer Name </div>
+            <center>
+<form method="post" action = "selectVolEC.php">
+<p>
+       <label for="Vol_FName">Volunteer First Name:</label>
+    
+       <input type="text" name="Vol_FName" id="Vol_FName" required>
+
+       <label for ="vol_Lname">Volunteet Last Name:</label>
+
+       <input type="text" name="Vol_LName" id ="Vol_LName" required>
+
+</p>
+   <input type="submit" value="Submit">
+
+
+                 </form>
+                </center>
+                <div id="normal">
+                <a href="index.php"><button>Back</button></a>
+                </div>
+            </div>
+        </div>
+</body>
+</html>
+

@@ -1,0 +1,44 @@
+<html>
+<head>
+    <title>Watauga Humane Society Database</title>
+    <link rel="stylesheet" type="text/css" href="Stylesheet1.css">
+    <link rel="icon" src="images/favicon.png">
+    <!--css and other information-->
+    </head>
+    <body>
+        <div id="wrap">
+            <div id="main">
+        <a href="index.php" id="nostylelink"><div id ="titlebar">
+            Watauga Humane Society Database
+        </div></a>
+            <div id="welcome"> New Adoption</div>
+            <center>
+            <form method="post" action="insertAdoption.php">
+<p>
+       <label for="Visitor_ID">Visitor ID:</label>
+       <input type="text" name="Visitor_ID" id="Visitor_ID" required>
+   </p>
+   <p>
+       <label for="Animal_ID"> Animal ID:</label>
+       <input type="text" name="Animal_ID" id="Animal_ID" required>
+   </p>
+   <p>
+       <label for="Date_Time"> Date Time:</label>
+       <input type="datetime-local" name="Date_Time" id="Date_Time" required>
+   </p>
+   <p>
+       <label for="Fees_Paid"> Fees Paid:</label>
+       <input type="radio" name="fees" value="Y" checked> YES<br/>
+       <input type="radio" name="fees" value="N"> NO<br/>
+   </p>
+   <input type="submit" value="Submit">
+</form>
+                </center>
+                <div id="normal">
+                <a href="index.php"><button>Back</button></a>
+                </div>
+            </div>
+        </div>
+</body>
+</html>
+

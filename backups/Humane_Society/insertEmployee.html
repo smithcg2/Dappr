@@ -1,0 +1,82 @@
+<html>
+<head>
+    <title>Watauga Humane Society Database</title>
+    <link rel="stylesheet" type="text/css" href="Stylesheet1.css">
+    <link rel="icon" src="images/favicon.png">
+    <!--css and other information-->
+    </head>
+    <body>
+        <div id="wrap">
+            <div id="main">
+        <a href="index.php" id="nostylelink"><div id="titlebar">
+            Watauga Humane Society Database
+        </div></a>
+<div id="welcome">Employee</div>
+<center>
+<form action="insertEmployee.php" method="post">
+<p>
+<label for="Employee_ID">Employee ID:</label>
+<input type="text" name="Employee_ID" id="Employee_ID" maxlength="11" required>
+</p>
+<p>
+<label for="SSN">SSN (format:xxx-xx-xxxx):</label>
+<input type="text" name="SSN" id="SSN" maxlength="11" pattern="^\d{3}-\d{2}-\d{4}$" required>
+</p>
+<p>
+<label for="Emp_FName">First Name:</label>
+<input type="text" name="Emp_FName" id="Emp_FName" maxlength="25" required>
+</p>
+<p>
+<label for="Emp_MI">Middle Initial:</label>
+<input type="text" name="Emp_MI" id="Emp_MI" maxlength = "1" required>
+</p>
+<p>
+<label for="Emp_LName">Last Name:</label>
+<input type="text" name="Emp_LName" id="Emp_LName" maxlength="25" required>
+</p>
+<p>
+<label for="dob">Date of Birth:</label>
+<input type="date" name="dob" id="dob" required>
+</p>
+<p>
+<label for="Emp_Phone">Phone Number(format:xxx-xxx-xxxx)</label>
+<input type="text" name="Emp_Phone" id="Emp_Phone" maxlength="12" pattern="^\d{3}-\d{3}-\d{4}$" required>
+</p>
+<p>
+<label for="Emp_Email">Email:</label>
+<input type="text" name="Emp_Email" id ="Email" maxlength="40">
+</p>
+<p>
+<label for="Start_Date">Start_Date:</label>
+<input type="date" name="Start_Date" id="Start_Date" required>
+</p>
+<p>
+<textarea name="Skills_Certifications" placeholder="Please list all skills and certifications"></textarea><br/>
+</p>
+<p>
+<textarea name="Emp_Allergies" placeholder="Please list all allergies"></textarea><br/>
+</p>
+
+<p>
+<label for="Emp_PayRate">Pay Rate:</label>
+<input type="number" name="Emp_PayRate" id="Pay_Rate" step=".01" min = "0"  maxlength="11" required>
+</p>
+<p>
+<label for="Super_ID">Supervisor ID:</label>
+<input type="text" name="Super_ID" id="Super_ID" maxlength="11">
+</p>
+<p>
+<label for="Facility_Number">Facitlity Number:</label>
+<input type="number" name="Facility_Number" id="Facility_Number"
+</p>
+
+<input type="submit" value="Submit">
+</form>
+</center>
+<div id="normal">
+<a href="index.php"><button>Back</button></a>
+             </div>
+            </div>
+        </div>
+    </body>
+</html>

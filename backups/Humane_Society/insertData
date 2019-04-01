@@ -1,0 +1,8 @@
+INSERT INTO facility VALUES('1', 'Headquarters', '312 Paws Way, Boone, NC 28608', '828-264-7865');
+INSERT INTO facility VALUES('2', 'Adoption Center', '310 Paws Way, Boone, NC 28608', '828-264-7850');
+INSERT INTO facility VALUES('3', 'Therapy Center', '310 Paws Way, Boone, NC 28608', '828-264-7851');
+INSERT INTO facility VALUES('4', 'Clinic', '309 Paws Way, Boone, NC 28608', '828-264-8000');
+INSERT INTO facility VALUES('6', 'Small Animal Kennels', '315 Paws Way, Boone, NC 28608', '828-264-6001');
+INSERT INTO facility VALUES('7', 'Large Animal Kennels', '315 Paws Way, Boone, NC 28608', '828-264-6002');
+
+INSERT INTO employee VALUES('6', 'Small Animal Kennels', '315 Paws Way, Boone, NC 28608', '828-264-6001');

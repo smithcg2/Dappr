@@ -107,6 +107,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	<title>Dappr</title>
 	<meta name = "viewport" content="width=device-width, maximum-scale=1.5">
 	<link rel="stylesheet" type="text/css" href="../style/main.css">
+	<link rel="stylesheet" type="text/css" href="../style/responsive.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -124,7 +125,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <div id="nav">
 <a href="../pages/home.php">
 <img id="homelogo" src="../images/logo_only.png" alt="logo">
-<img id="logotext" src="../images/logo_textonly.png" alt="Dappr">
+<img id="homelogotext" src="../images/logo_textonly.png" alt="Dappr">
 </a>
 </div>
     <div id="wrapper">
@@ -174,6 +175,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		</center>
         </form>
     </div>
-</div>    
+</div>
+<?php include("../scripts/footer.php"); ?>    
 </body>
 </html>

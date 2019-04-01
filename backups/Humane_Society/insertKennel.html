@@ -1,0 +1,43 @@
+<html>
+<head>
+    <title>Watauga Humane Society Database</title>
+    <link rel="stylesheet" type="text/css" href="Stylesheet1.css">
+    <link rel="icon" src="images/favicon.png">
+    <!--css and other information-->
+    </head>
+    <body>
+        <div id="wrap">
+            <div id="main">
+        <a href="index.php" id="nostylelink"><div id ="titlebar">
+            Watauga Humane Society Database
+        </div></a>
+            <div id="welcome">New Kennel</div>
+            <center>
+<form method="post" action = "insertKennel.php">
+<p>
+       <label for="Kennel_Number">Kennel Number:</label>
+       <input type="text" name="Kennel_Number" id="Kennel_Number" required>
+   </p>
+   <p>
+       <label for="Type">Kennel Type:</label>
+       <input type="text" name="Type" id="Type" maxLength = 50 required>
+   </p>
+   <p>
+       <label for="Max_Occupancy">Max Occupancy:</label>
+       <input type="text" name="Max_Occupancy" id="Max_Occupancy" required>
+   </p>
+   <p>
+       <label for="Facility_Num">Facility Number:</label>
+       <input type="text" name="Facility_Num" id="Facility_Num" required>
+   </p>
+   <input type="submit" value="Submit">
+</form>
+                </center>
+                <div id="normal">
+                <a href="index.php"><button>Back</button></a>
+                </div>
+            </div>
+        </div>
+</body>
+</html>
+

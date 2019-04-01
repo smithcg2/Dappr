@@ -45,8 +45,8 @@
 	<title>Dappr</title>
 	<meta name = "viewport" content="width=device-width, maximum-scale=1.5">
 	<link rel="stylesheet" type="text/css" href="../style/main.css">
+	<link rel="stylesheet" type="text/css" href="../style/responsive.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="../scripts/buildelems.js" type="text/javascript"></script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135138799-1"></script>
@@ -63,7 +63,7 @@
 <div id="nav">
 <a href="../pages/home.php">
 <img id="homelogo" src="../images/logo_only.png" alt="logo">
-<img id="logotext" src="../images/logo_textonly.png" alt="Dappr">
+<img id="homelogotext" src="../images/logo_textonly.png" alt="Dappr">
 </a>
 </div>
 <div id="wrapper">
