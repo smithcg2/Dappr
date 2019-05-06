@@ -14,17 +14,29 @@ session_start();
 			$row = $result->fetch_assoc();
 			$count = $row['cntUser'];
 			
-			$query1 = "SELECT * FROM USERS WHERE USER = '".$uname."' and PASS = password('".$pass."')";
 		} else {
 			header('location: pages/login.php');
 		}
 
-			$result1 = mysqli_query($db,$query1);
-			$row1 = $result1->fetch_assoc();
 
 			if($count > 0){
+				$query1 = "SELECT * FROM USERS WHERE USER = '".$uname."' and PASS = password('".$pass."')";
+				$result1 = mysqli_query($db,$query1);
+				$row1 = $result1->fetch_assoc();
+				
 				$_SESSION['user'] = $uname;
 				$_SESSION['userid'] = $row1['USER_ID'];
+				$_SESSION['fname'] = $row1['FNAME'];
+				$_SESSION['mname'] = $row1['MNAME'];
+				$_SESSION['lname'] = $row1['LNAME'];
+				$_SESSION['city'] = $row1['CITY'];
+				$_SESSION['state'] = $row1['STATE'];
+				$_SESSION['zip'] = $row1['ZIP'];
+				$_SESSION['joined'] = $row1['JOINED'];
+				$_SESSION['email'] = $row1['EMAIL'];
+				
+				
+				
 				header('location: pages/home.php');
 			}
 			else
@@ -82,15 +94,15 @@ session_start();
 	</form>
 </div>
 </div>
-<div id="wrapper">
+<div id="home-wrapper">
 <div id="home-intro">
+<h1>Welcome to Dappr!</h1>
 <center>
-<h1>Introduction</h1>
-<h2>This is currently a work in progress for a capstone project.</h2>
-<h3>Cameron Smith</h3>
-<h3>Email me any questions: <a href="mailto:questions@dappr.app">questions@dappr.app</a></h3>
+<h2>That period of time in the morning before leaving for work never feels quite long enough. Whether it's the weight of the impending work day or the menial personal tasks (going to the gym, preparing meals, showering, getting dressed), waking up always seems too early and work seems to come too soon. Dappr simplifies the mornings, in turn, allowing more time to focus on…whatever else!</h2><br/>
+<h2>Dappr is a product that intelligently organizes mens' wardrobes and assembles outfits for them on a daily basis to give them back some time in their morning.</h2>
 </center>
-<div id="searchcloset">
+</div>
+<!--<div id="searchcloset">
 <center>
 <h1>Check Out Our Closet!</h1>
 			<form class="searchclosetform" method="POST" action="">
@@ -98,12 +110,20 @@ session_start();
 			<input class='submit' type='submit' value='Search' name='Search'>
 			<input class='submit' type='submit' value='Advanced Search' name='AdvancedSearch'>
 			<br/>
-				<a href="addclothes.php">Want to help? Add Clothes</a>
+				<a href="pages/addclothes.php">Want to help? Add Clothes</a>
 			</form>
 </center>
-</div>
+</div>-->
 <div id="home-images">
-Images
+<div class="img-wrap1">
+	<img src="images/hiking.jpg">
+</div>
+<div class="img-wrap2">
+	<img src="images/acc.jpg">
+</div>
+<div class="img-wrap3">
+	<img src="images/hangers.jpg">
+</div>
 </div>
 </div>
 </div>

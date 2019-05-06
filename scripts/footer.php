@@ -2,9 +2,9 @@
 <center>
 <table id="footertable">
 	<tr>
-		<td id="ftrlft"><center>
-			responsive elements? otherwise remove or fill with something here..
-		</center></td>
+		<td id="ftrlft">
+Email questions to: <a href="mailto:questions@dappr.app">questions@dappr.app</a>
+		</td>
 		
 		<td id="ftrmdl"><center>
 		<table><tr>

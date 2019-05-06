@@ -1,18 +1,6 @@
 <?php
 require("../../config.php");
 session_start();
-
-	if(isset($_POST['closet'])){
-		header('location: ../pages/closet.php');
-	}
-	if(isset($_POST['outfits'])){
-		header('location: ../pages/outfits.php');
-	}
-	if(isset($_POST['logout'])){
-		session_destroy();
-		header('location: ../pages/home.php');
-	}
-
 ?>
 <html>
 <head>
@@ -21,6 +9,8 @@ session_start();
 	<link rel="stylesheet" type="text/css" href="../style/main.css">
 	<link rel="stylesheet" type="text/css" href="../style/responsive.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="../scripts/openWeather/src/openweather.js"></script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135138799-1"></script>
@@ -34,13 +24,10 @@ session_start();
 
 
 </head>
-
 	<body>
 
-
-
 <header class="header">
-  <a href=""><img id="homelogo" src="../images/logo_only.png"><img id="logotext" src="../images/logo_textonly.png"></a>
+  <a href="../pages/home.php"><img id="homelogo" src="../images/logo_only.png"><img id="logotext" src="../images/logo_textonly.png"></a>
   <input class="menu-btn" type="checkbox" id="menu-btn" />
   <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
   <ul class="menu">
@@ -50,19 +37,3 @@ session_start();
     <li><a href="../pages/logout.php">Logout</a></li>
   </ul>
 </header>
-<!--
-
-<div id="nav">
-<a href="../pages/home.php">
-<img id="homelogo" src="../images/logo_only.png" alt="logo">
-<img id="logotext" src="../images/logo_textonly.png" alt="Dappr">
-</a>
-<div class="navbuttons">
-	<form method='POST' action="">
-	<input class='navbutton' type='submit' value='Closet' name='closet'>
-	<input class='navbutton' type='submit' value='Outfits' name='outfits'>
-	<input class='navbutton' type='submit' value='Logout' name='logout'>
-	</form>
-</div>
-</div>
--->

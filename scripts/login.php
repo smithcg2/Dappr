@@ -13,11 +13,10 @@
 
 
 			$count = mysqli_num_rows($result);
-			echo $count
 			if ($count == 1) {
 				session_register($username);
 				$_SESSION['login_user'] = $username;
-				echo "<script type='text/javascript'>document.location='welcome.php';</script>";
+				echo "<script type='text/javascript'>document.location='pages/login.php';</script>";
 				exit();
 			}else{
 				$error = "Your login name or password is incorrect.";

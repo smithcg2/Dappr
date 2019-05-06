@@ -20,14 +20,22 @@
 			$row = $result->fetch_assoc();
 			$count = $row['cntUser'];
 			
+
+			if($count > 0){
+				$_SESSION['user'] = $uname;
 			$query1 = "SELECT * FROM USERS WHERE USER = '".$uname."' and PASS = password('".$pass."')";
 }
 			$result1 = mysqli_query($db,$query1);
 			$row1 = $result1->fetch_assoc();
-
-			if($count > 0){
-				$_SESSION['user'] = $uname;
 				$_SESSION['userid'] = $row1['USER_ID'];
+				$_SESSION['fname'] = $row1['FNAME'];
+				$_SESSION['mname'] = $row1['MNAME'];
+				$_SESSION['lname'] = $row1['LNAME'];
+				$_SESSION['city'] = $row1['CITY'];
+				$_SESSION['state'] = $row1['STATE'];
+				$_SESSION['zip'] = $row1['ZIP'];
+				$_SESSION['joined'] = $row1['JOINED'];
+				$_SESSION['email'] = $row1['EMAIL'];
 				header('location: home.php');
 			}
 			else

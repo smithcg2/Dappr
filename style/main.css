@@ -18,7 +18,7 @@
 	margin: auto;
 }
 
-#footertable td {
+#footertable td, td a {
 	vertical-align: bottom;
 	width: 33%;
 	color: #ddd;
@@ -71,7 +71,7 @@
 	width: 0px;
 }
 
-#wrapper {
+#wrapper, #home-wrapper {
 	position: fixed;
 	top: 60px;
 	width: 80%;
@@ -83,8 +83,34 @@
 	padding-bottom: 50px;
 }
 
+#home-wrapper {
+	width: 100%;
+	padding-bottom: -10px;
+	ackground-color: #222;
+}
+
+
 #home-info{
 	max-height: 25%;
+}
+
+#home-intro {
+	ackground-image: url("../images/closet.jpg");
+	background-size: cover;
+	box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.4);
+	color: white;
+	padding: 20px;
+	//margin: 10px;
+	min-height: 50%;
+}
+
+#home-intro h1 {
+	text-align: center;
+}
+
+#home-intro h2 {
+	width: 80%;
+	text-align: justify;
 }
 
 .navbutton {
@@ -133,7 +159,7 @@
 	background-color: rgba(34,34,34,.75);
 	width: 100%;
 	border-radius: 10px;
-	color: white;
+	color: black;
 }
 
 #searchclosetform {
@@ -152,8 +178,109 @@
 	width: 90%;
 }
 
+#title {
+	font-size: 2vw;
+	text-align: center;
+}
 
+#clothesform {
+	text-align: center;
+}
 
+#clothesform label {
+	display: block;
+	font-size: 150%;
+	text-align: center;
+}
+#clothesform input,textarea,select, input["checkbox"] {
+	display: inline-block;
+	margin: auto;
+	width: 50%;
+}
+
+#clothesform > table {
+	width: 100%;
+}
+
+#clothesform > table td {
+	width: calc(100% / 5);
+	text-align: center;
+	vertical-align: middle;
+}
+
+#home-images {
+	width: auto;
+	overflow-x: hidden;
+	transform: translateX(8%);
+	margin-top: 10px;
+}
+
+.img-wrap1 {
+	  z-index: 2;
+	  position: relative;
+	  display: inline-block;
+	  float: left;
+	  width: calc(100%/3);
+	  transform: translateX(0%);
+	    -webkit-clip-path: polygon(0 0%, 75% 0, 100% 100%, 0% 100%%);
+	      clip-path: polygon(0% 0%, 75% 0, 100% 100%, 0% 100%);
+      }
+
+.img-wrap1 > img{
+	  width: 100%;
+  }
+
+.img-wrap2 {
+	  z-index: 3;
+	  position: relative;
+	  display: inline-block;
+	  float: left;
+	  width: calc(100%/3);
+	  transform: translateX(-25%);
+	    -webkit-clip-path: polygon(0 0%, 75% 0, 100% 100%, 25% 100%%);
+	      clip-path: polygon(0% 0%, 75% 0, 100% 100%, 25% 100%);
+      }
+
+.img-wrap2 > img{
+	  width: 100%;
+  }
+
+.img-wrap3 {
+	  z-index: 4;
+	  position: relative;
+	  display: inline-block;
+	  float: left;
+	  width: calc(100%/3);
+	  transform: translateX(-50%);
+	    -webkit-clip-path: polygon(0 100%, 0% 0, 100% 100%, 25% 100%%);
+	      clip-path: polygon(0% 0%, 100% 0, 100% 100%, 25% 100%);
+      }
+
+.img-wrap3 > img{
+	  width: 100%;
+  }
+
+.weather-wrapper {
+	background: #222;
+	margin: 2% 2% 2% 0;
+	padding: 20px 5%;
+	float: left;
+	color: white;
+	width: auto;
+	max-width: 400px;
+}
+
+strong {
+	color: lightgrey;
+}
+
+.capitalize {
+	text-transform: capitalize;
+}
+
+.hide {
+	display: none;
+}
 
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 html {
