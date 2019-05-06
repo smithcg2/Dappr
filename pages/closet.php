@@ -13,30 +13,34 @@ include('../scripts/session.php');
 <div id="title">Check out your closet!</div>
 <center>
 
-<a href="addclothes.php">Add Clothes Here!</a>
+<a href="addclothes.php"><button>Add Clothes</button></a><br/>
+
 <?php
 
-		$sql = 'SELECT * FROM CLOSET, CLOTHING WHERE USER_ID = '.$userid.' GROUP BY CLOTHING.CLOTHING_ID';
+		$sql = 'SELECT * FROM CLOSET WHERE USER_ID = '.$userid;
 
 		
                     $result = $db->query($sql);
 
                     if ($result->num_rows > 0) {
-                    echo "<table id='clothestable' border = \"1\" width = \"100%;\" style = \"text-align: center;\"><tr><th>Photo</th><th>Name</th><th>Style</th><th>Size</th><th>Units</th><th>Rank</th></tr>";
                     // output data of each row
                     while($row = $result->fetch_assoc()) {
-		        echo "<tr><td><img src = \"../uploads/".$row['IMG']."\" width = \"100px;\"></td><td>".$row['NAME']."</td><td>".$row['STYLE']."</td> <td>".$row['SIZE']." ".$row['SIZE2']."</td><td>".$row['UNITS']."</td><td>".$row['RANK']."</td></tr>";
+
+			    echo "<a href = 'updateclothes.php?id=".$row['CLOTHING_ID']."' ><div class='clothingdiv'>";
+				echo "<img class='clothingimg' src = '../uploads/".(mysqli_fetch_row($db->query("SELECT IMG FROM CLOTHING WHERE CLOTHING_ID = ".$row['CLOTHING_ID'].""))[0])."'>";	    
+			    echo "<h3>".(mysqli_fetch_row($db->query("SELECT NAME FROM CLOTHING WHERE CLOTHING_ID = ".$row['CLOTHING_ID'].""))[0])."</h3>";
+			    echo "<span class='clothingsize'>Size: ".$row['SIZE']." ".$row['SIZE2']."</span> ";
+			    echo "<span class='units'>Units: ".$row['UNITS']."</span>";
+
+			    echo "</div></a>";	    
+
                     }
-                    echo "</table>";
                 } else {
-			echo "Looks Like You Are All Out Of Clothes";
+			echo "Nothing Here :(";
 		}
 
 ?>
 </center>
-<div id="normal">
-<a href="home.php"><button>Home</button></a>
-             </div>
             </div>
 	</div>
 	<?php include("../scripts/footer.php");?>

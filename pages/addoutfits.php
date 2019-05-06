@@ -5,7 +5,6 @@ include('../scripts/session.php');
 
 
 	$userid = $_SESSION['userid'];
-	$clothingids = "";
 	$rank = '50';
 	$weather = 'Sunny/Warm';
 	$top = "";
@@ -32,7 +31,7 @@ include('../scripts/session.php');
 						   LIMIT 1"));
 				$bottom = $row[0];
 			}
-			if($_POST['shoe'] == "On") {
+			if($_POST['shoes'] == "On") {
 				$row = mysqli_fetch_row($db->query("SELECT CLOTHING.CLOTHING_ID 
 						   FROM CLOTHING, CLOSET 
 						   WHERE USER_ID = '$userid' AND TYPE = 'Shoes'
@@ -51,18 +50,16 @@ include('../scripts/session.php');
 			if($_POST['outerwear'] == "On") {
 				$row = mysqli_fetch_row($db->query("SELECT CLOTHING.CLOTHING_ID 
 						   FROM CLOTHING, CLOSET 
-						   WHERE USER_ID = '$userid' AND TYPE = 'Outerwear'
+						   WHERE USER_ID = '$userid' AND TYPE = 'Outerwear' OR TYPE = 'Jacket'
 					           ORDER BY RAND()
 						   LIMIT 1"));
 				$outerwear = $row[0];
 			}
 
-			$clothingids = $top.','.$bottom.','.$shoe.','.$accessory.','.$outerwear;
-
-			$insert = "INSERT INTO OUTFIT (`USER_ID`,`CLOTHING_IDS`,`RANK`,`WEATHER_CREATED`) VALUES ('$userid','$clothingids','$rank','$weather');";
+			$insert = "INSERT INTO OUTFIT (`USER_ID`,`TOP_ID`, `BOTTOM_ID`, `SHOES_ID`, `ACC_ID`, `OUT_ID`,`RANK`,`WEATHER_CREATED`) VALUES ('$userid','$top', '$bottom', '$shoe', '$accessory', '$outerwear', '$rank','$weather');";
 			if ($db->query($insert))
                 	{
-                    		header('location: home.php');
+                    		header('location: outfits.php');
                 	}
                 	else
                 	{
@@ -95,30 +92,24 @@ include('../scripts/session.php');
         <div id="wrapper"><center>
 <div id="title">What do you need in an outfit?</div>
 <form id="clothesform" action="" method="POST" enctype="multipart/form-data">
-<table><tr><center>
-<td>
+<center>
 <label for="top">Top</label>
 <input type="checkbox" name="top" id="top" class="checkbox" value = "On"></input>
-</td>
-<td>
+<br/>
 <label for="bottom">Bottom</label>
 <input type="checkbox" name="bottom" id="bottom" class="checkbox" value="On"></input>
-</td>
-<td>
+<br/>
 <label for="outerwear">Outerwear</label>
 <input type="checkbox" name="outerwear" id="outerwear" class="checkbox" value="On"></input>
-</td>
-<td>
+<br/>
 <label for="shoes">Shoes</label>
-<input type="checkbox" name="shoes" id="shoes" class="checkbox"></input>
-</td>
-<td>
+<input type="checkbox" name="shoes" id="shoes" class="checkbox" value="On"></input>
+<br/>
 <label for="accessory">Accessory</label>
-<input type="checkbox" name="accessory" id="accessory" class="checkbox"></input>
-</td></center>
-</tr></table>
+<input type="checkbox" name="accessory" id="accessory" class="checkbox" value="On"></input>
+<br/>
 <input type="submit" name="submit" value="Submit">
-</form>
+<center></form>
 <a href="home.php"><button>Home</button></a></center>
             </div>
 	</div>

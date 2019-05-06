@@ -4,7 +4,9 @@
 	session_start();
 
 	if(isset($_POST['updateaccount'])) {
-		echo "<script type='text/javascript'>alert('submitting');</script>";
+		$sql = "UPDATE USERS SET USER = '".$_POST['user']."', EMAIL = '".$_POST['email']."', FNAME = '".$_POST['fname']."', MNAME = '".$_POST['mname']."', LNAME = '".$_POST['lname']."', CITY = '".$_POST['city']."', STATE = '".$_POST['state']."', ZIP = '".$_POST['zip']."' WHERE USER_ID = '".$_SESSION['userid']."'";
+		$db->query($sql);
+		header('location: logout.php');
 	}
 ?>
 
@@ -37,7 +39,7 @@
 </a>
 </div>
 
-
+<div id="wrapper">
 <div class="container">
     <h1>Edit Profile</h1>
   	<hr>
@@ -46,17 +48,19 @@
       <div class="col-md-3">
         <div class="text-center">
           <img src="../images/logo_only.png" style="width: 100px; height: 100px;"class="avatar img-circle" alt="avatar">
-          <h6>Upload a different photo...</h6>
+	  <!--
+	  <h6>Upload a different photo...</h6>
           
           <input type="file" class="form-control">
-        </div>
+	-->
+	</div>
       </div>
       
       <!-- edit form column -->
       <div class="col-md-9 personal-info">
         <h3>Personal info</h3>
         
-        <form class="form-horizontal" role="form">
+        <form class="form-horizontal" method="POST">
           <div class="form-group">
             <label class="col-md-3 control-label">Username:</label>
             <div class="col-md-8">

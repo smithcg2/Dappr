@@ -13,29 +13,32 @@ include('../scripts/session.php');
 <div id="title">Check out your outfits!</div>
 <center>
 
-<a href="addoutfits.php">Generate New Outfits</a>
+<a href="addoutfits.php">Generate New Outfits</a><br/><br/>
 <?php
 
-		$sql = 'SELECT * FROM OUTFITS WHERE USER_ID = '.$userid;
+		$sql = 'SELECT * FROM OUTFIT WHERE USER_ID = '.$userid;
 
 		
                     $result = $db->query($sql);
 
                     if ($result->num_rows > 0) {
-                    echo "<table id='clothestable' border = \"1\" width = \"100%;\" style = \"text-align: center;\"><tr><th>Photo</th><th>Name</th><th>Style</th><th>Size</th><th>Units</th><th>Rank</th></tr>";
                     // output data of each row
-                    while($row = $result->fetch_assoc()) {
-		        echo "<tr><td><img src = \"../uploads/".$row['IMG']."\" width = \"100px;\"></td><td>".$row['NAME']."</td><td>".$row['STYLE']."</td> <td>".$row['SIZE']." ".$row['SIZE2']."</td><td>".$row['UNITS']."</td><td>".$row['RANK']."</td></tr>";
+			    while($row = $result->fetch_assoc()) {
+
+			    echo ("<a href='viewOutfit.php?id=".$row['OUTFIT_ID']."'><div id='".$row['OUTFIT_ID']."' class='outfitdiv'><center>".
+				    "<img class='outfitimg-large' src='../uploads/".(mysqli_fetch_row($db->query("SELECT IMG FROM CLOTHING WHERE CLOTHING_ID = '".$row['TOP_ID']."'"))[0])."'>".
+				    "<img class='outfitimg-large' src='../uploads/".(mysqli_fetch_row($db->query("SELECT IMG FROM CLOTHING WHERE CLOTHING_ID = '".$row['BOTTOM_ID']."'"))[0])."'><br/>".
+				    "<img class='outfitimg-small' src='../uploads/".(mysqli_fetch_row($db->query("SELECT IMG FROM CLOTHING WHERE CLOTHING_ID = '".$row['ACC_ID']."'"))[0])."'>".
+				    "<img class='outfitimg-small' src='../uploads/".(mysqli_fetch_row($db->query("SELECT IMG FROM CLOTHING WHERE CLOTHING_ID = '".$row['SHOES_ID']."'"))[0])."'>".
+				    "<img class='outfitimg-small' src='../uploads/".(mysqli_fetch_row($db->query("SELECT IMG FROM CLOTHING WHERE CLOTHING_ID = '".$row['OUT_ID']."'"))[0])."'>".
+				    "</center></div></a>");
                     }
-                    echo "</table>";
                 } else {
 			echo ", You're All Out!";
 		}
 
 ?>
 </center>
-<div id="normal">
-<a href="home.php"><button>Home</button></a>
              </div>
             </div>
 	</div>

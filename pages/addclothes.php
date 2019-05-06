@@ -1,8 +1,6 @@
 <?php
-
 include('../../config.php');
 include('../scripts/session.php');
-
 function type_select($default_value='') {
   $select = '<select name="type">';
   $options = array('Shirt','Shorts','Pants','Jacket','Vest','Outerwear','Shoes','Socks','Underwear','Belt','Tie','Accessory','Other',);
@@ -12,7 +10,6 @@ function type_select($default_value='') {
   $select .= '</select>';
   return $select;  
 }
-
 function style_select($default_value='') {
   $select = '<select name="style">';
   $options = array('Formal','Business','Classic','Casual','Work','Utilitarian','Swim','Comfort','Work Out','Other',);
@@ -22,7 +19,6 @@ function style_select($default_value='') {
   $select .= '</select>';
   return $select;  
 }
-
 function color_select($default_value='') {
   $select = '<select name="color">';
   $options = array('Black','White','Gray','Brown','Beige','Red','Green','Blue','Navy','Yellow','Orange','Green','Purple','Pink','Other',);
@@ -32,7 +28,6 @@ function color_select($default_value='') {
   $select .= '</select>';
   return $select;  
 }
-
 function fit_select($default_value='') {
   $select = '<select name="fit">';
   $options = array('Fitted','Slim','Regular','Classic',);
@@ -42,7 +37,6 @@ function fit_select($default_value='') {
   $select .= '</select>';
   return $select;  
 }
-
 function units_select($default_value='') {
   $select = '<select name="units">';
   $options = array('1','2','3','4','5','6','7','8','9','10+',);
@@ -52,7 +46,6 @@ function units_select($default_value='') {
   $select .= '</select>';
   return $select;  
 }
-
 function rate_select($default_value="3") {
   $select = '<select name="rate">';
   $options = array('1','1.5','2','2.5','3','3.5','4','4.5','5');
@@ -62,7 +55,6 @@ function rate_select($default_value="3") {
   $select .= '</select>';
   return $select;  
 }
-
 function weather_select($default_value='') {
   $select = '<select name="weather">';
   $options = array('Sunny/Warm','Sunny/Cool','Rain','Snow','Other',);
@@ -72,14 +64,12 @@ function weather_select($default_value='') {
   $select .= '</select>';
   return $select;  
 }
-
 function write_option($value, $display, $default_value='') {
   $option = '<option value="'.$value.'"';
   $option .= ($default_value == $value) ? ' SELECTED' : '';
   $option .= '>'.$display.'</option>';
   return $option;
 }
-
                 $type = $_POST['type'];
                 $style = $_POST['style'];
                 $color = $_POST['color'];
@@ -91,31 +81,26 @@ function write_option($value, $display, $default_value='') {
 		$size2 = $_POST['size2'];
 		$units = $_POST['units'];
 		$rate = $_POST['rate'];
-
-/**
+                if (isset($_POST['submit']))
+                {
 	if ($_FILES['file_upload']['error'] == 0)
 	{
-
 		// Check for errors
 	if($_FILES['file_upload']['error'] > 0 && $_FILES['file_upload']['error'] != 4){
     		die('An error ocurred when uploading.');
 	}
-
 	if(!getimagesize($_FILES['file_upload']['tmp_name'])){
     		die('Please ensure you are uploading an image.');
 	}
-
 	// Check filesize
-	if($_FILES['file_upload']['size'] > 500000){
+	if($_FILES['file_upload']['size'] > 5000000){
     		die('File uploaded exceeds maximum upload size.');
 	}
-
 	// Check if the file exists
 	if(file_exists('upload/' . $_FILES['file_upload']['name'])){
 		$actual_name = $_FILES['file_upload']['name'];
 		$original_name = $actual_name;
 		$extension = $_FILES['file_upload']['extension'];
-
 		$i = 1;
 		while(file_exists('../uploads/'.$actual_name.".".$extension))
 		{           
@@ -125,24 +110,16 @@ function write_option($value, $display, $default_value='') {
 		}
 		$_FILES['file_upload']['name'] = $actual_name;
 	}
-
 	// Upload file
-	if(!move_uploaded_file($_FILES['file_upload']['tmp_name'], '../uploads' . $_FILES['file_upload']['name'])){
+	if(!move_uploaded_file($_FILES['file_upload']['tmp_name'], '../uploads/' . $_FILES['file_upload']['name'])){
     		die('Error uploading file - check destination is writeable.');
 	}
-
-                $photo = $_FILES['file_upload']['name'].".".$_FILES['file_upload']['extension'];
+                $photo = $_FILES['file_upload']['name'];
 	}
 	else
 	{
-                $photo = "default.jpg";
+                $photo = "Default";
 	}
-
- */
-                $photo = "default.png";
-
-                if (isset($_POST['submit']))
-                {
                 
 			$insertClothing = "INSERT INTO CLOTHING 
 				   (`TYPE`, `STYLE`, `COLOR`, `FIT`, `NAME`, `TAGS`, `IMG`, `WEATHER`) 
@@ -150,7 +127,6 @@ function write_option($value, $display, $default_value='') {
 			
 			$ic = $db->query($insertClothing);
 			$lastid = $db->insert_id;
-
 			$userid = $_SESSION['userid'];
 			$insert = "INSERT INTO CLOSET
 				   (`USER_ID`,`CLOTHING_ID`,`SIZE`,`SIZE2`,`UNITS`,`RATE`)
@@ -158,7 +134,7 @@ function write_option($value, $display, $default_value='') {
 			
                 if ($db->query($insert))
                 {
-                    header('location: addclothes.php');
+                    header('location: closet.php');
                 }
                 else
                 {
@@ -166,7 +142,6 @@ function write_option($value, $display, $default_value='') {
                     echo "Error: " . $insert . "" . mysqli_error($db);
                     
                     ob_flush();
-
                     flush();
                     
                     usleep(5000000);
@@ -183,7 +158,6 @@ function write_option($value, $display, $default_value='') {
                 }
                 
                 mysqli_close($db);
-
 		include("../scripts/buildelems.php");
 ?>           
 
@@ -235,10 +209,8 @@ function write_option($value, $display, $default_value='') {
 <label for="tags">Tags (optional. put each tag on a new line):</label>
 	<textarea name="tags" id="tags" class="clothestextarea"></textarea>
 </p>
-<!--<p>
 <label for="Photo">Photo:</label>
 <input type="file" name="file_upload" id="file_upload">
-</p>-->
 
 <input type="submit" name="submit" value="Submit">
 </form>
@@ -248,5 +220,4 @@ function write_option($value, $display, $default_value='') {
 	<?php include("../scripts/footer.php");?>
     </body>
 </html>
-
 

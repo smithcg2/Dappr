@@ -132,6 +132,14 @@ a {
 }
 
 @media (max-width: 45em) {
+	input, select, textarea {
+		width: 90%;
+	}
+
+	input[type="file"] {
+		margin: auto;
+	}
+
 	body #homelogo, body .index-login {
 		display: none;
 	}
@@ -165,7 +173,32 @@ a {
 	}
 
 	.weather-wrapper {
-	width: 80%;
+	width: 100%;
+	position: fixed;
+	bottom: 5%;
+	}
+
+	.weather-wrapper p {
+		float: left;
+		width: 49%;
+	}
+
+	.clothingdiv {
+		width: 80%;
+		margin: 0 10%;
+	}
+
+	.clothingdiv h3 {
+		font-size: 100%;
+	}
+
+	.outfitdiv {
+		width: 80%;
+		margin: 0 10%;
+	}
+
+	.outfitdiv {
+		font-size: 100%;
 	}
 
 }
