@@ -174,8 +174,7 @@ a {
 
 	.weather-wrapper {
 	width: 100%;
-	position: fixed;
-	bottom: 5%;
+	display: inline-block;
 	}
 
 	.weather-wrapper p {

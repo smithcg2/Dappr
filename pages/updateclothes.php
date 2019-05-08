@@ -5,6 +5,7 @@
 
 	$clothingid = $_REQUEST['id'];	
 	$row = mysqli_fetch_row($db->query("SELECT * FROM CLOTHING WHERE CLOTHING_ID = ".$clothingid));
+	$row1 = mysqli_fetch_row($db->query("SELECT * FROM CLOSET WHERE CLOTHING_ID = ".$clothingid." AND USER_ID = ".$_SESSION['userid']));
 
 function type_select($default_value='') {
   $select = '<select name="type">';
@@ -80,11 +81,15 @@ $style = $row[2];
 $color = $row[3];
 $fit = $row[4];
 $img = $row[7];
+$size = $row1[2];
+$size2 = $row2[3];
+$units = $row2[4];
 $weather = $row[8];
 
 	if (isset($_POST['update'])) {
 		$sql = "UPDATE CLOTHING SET TYPE='".$_POST['type']."', STYLE='".$_POST['style']."', COLOR='".$_POST['color']."', FIT='".$_POST['fit']."', NAME='".$_POST['name']."', WEATHER='".$_POST['weather']."' WHERE CLOTHING_ID = ".$clothingid."";
 		$db->query($sql);
+		$db->query("UPDATE CLOSET SET SIZE='".$_POST['size']."', SIZE2='".$_POST['size2']."', UNITS='".$_POST['units']."' WHERE CLOTHING_ID ='".$clothingid."' AND USER_ID='".$_SESSION['userid'].".");
 		header('location: closet.php');
 		exit;
 		}
@@ -213,7 +218,7 @@ $weather = $row[8];
             <div class="col-md-8">
               <input type="submit" class="btn btn-primary" value="Save Changes" name="update">
               <span></span>
-	      <a href="home.php"><input type="button" class="btn btn-default" value="Cancel"></a>
+	      <a href="closet.php"><input type="button" class="btn btn-default" value="Cancel"></a>
             </div>
           </div>
         </form>

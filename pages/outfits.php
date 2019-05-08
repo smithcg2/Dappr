@@ -25,13 +25,13 @@ include('../scripts/session.php');
                     // output data of each row
 			    while($row = $result->fetch_assoc()) {
 
-			    echo ("<a href='viewOutfit.php?id=".$row['OUTFIT_ID']."'><div id='".$row['OUTFIT_ID']."' class='outfitdiv'><center>".
+			    echo ("<!--<a href='viewOutfit.php?id=".$row['OUTFIT_ID']."'>--><div id='".$row['OUTFIT_ID']."' class='outfitdiv'><center>".
 				    "<img class='outfitimg-large' src='../uploads/".(mysqli_fetch_row($db->query("SELECT IMG FROM CLOTHING WHERE CLOTHING_ID = '".$row['TOP_ID']."'"))[0])."'>".
 				    "<img class='outfitimg-large' src='../uploads/".(mysqli_fetch_row($db->query("SELECT IMG FROM CLOTHING WHERE CLOTHING_ID = '".$row['BOTTOM_ID']."'"))[0])."'><br/>".
 				    "<img class='outfitimg-small' src='../uploads/".(mysqli_fetch_row($db->query("SELECT IMG FROM CLOTHING WHERE CLOTHING_ID = '".$row['ACC_ID']."'"))[0])."'>".
 				    "<img class='outfitimg-small' src='../uploads/".(mysqli_fetch_row($db->query("SELECT IMG FROM CLOTHING WHERE CLOTHING_ID = '".$row['SHOES_ID']."'"))[0])."'>".
 				    "<img class='outfitimg-small' src='../uploads/".(mysqli_fetch_row($db->query("SELECT IMG FROM CLOTHING WHERE CLOTHING_ID = '".$row['OUT_ID']."'"))[0])."'>".
-				    "</center></div></a>");
+				    "</center></div><!--</a>-->");
                     }
                 } else {
 			echo ", You're All Out!";

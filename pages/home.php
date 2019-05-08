@@ -76,8 +76,15 @@
 
 	</script>
 <div class="lastOutfit">
+<h2>
+Welcome to your Dappr closet.  Check out the weather to the left and look up at the top to find your closet, outfits, and account information.  
+</h2>
+
 </div>
 <div class="recomendedOutfit">
+<h1>
+Check out your outfits to see your past outfits and make new ones.
+</h1>
 </div>
 <div class="rightHome">
 </div>
